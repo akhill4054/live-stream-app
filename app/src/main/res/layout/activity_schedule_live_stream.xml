@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".schedule.ui.ScheduleLiveStreamActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        tools:context=".schedule.ui.ScheduleLiveStreamActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/llToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:paddingVertical="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageButton
+                    android:id="@+id/btnNavigateUp"
+                    style="@style/IconButtonTypical"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_marginStart="8dp"
+                    android:contentDescription="@string/navigate_back"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_back_24"
+                    app:tint="@color/bluey_grey" />
+
+                <TextView
+                    android:id="@+id/tvToolbarTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/black_80"
+                    android:textFontWeight="600"
+                    android:textSize="24sp"
+                    tools:text="@string/enter_live_stream_details" />
+            </LinearLayout>
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/progressBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:visibility="invisible"
+                app:layout_constraintTop_toBottomOf="@id/llToolbar" />
+
+            <ImageView
+                android:id="@+id/ivThumbnail"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/secondary_white_3"
+                android:contentDescription="@string/video_thumbnail"
+                app:layout_constraintDimensionRatio="w,9:18"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/progressBar" />
+
+            <ImageView
+                android:id="@+id/ivDummyThumbnail"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:alpha="0.7"
+                android:contentDescription="@string/pick_an_image"
+                android:paddingTop="20dp"
+                android:paddingBottom="60dp"
+                android:src="@drawable/ic_baseline_image_24"
+                app:layout_constraintBottom_toBottomOf="@+id/ivThumbnail"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/llToolbar" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSelectImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="@color/white"
+                android:text="@string/pick_an_image"
+                android:textAllCaps="false"
+                android:textColor="@color/black_90"
+                app:cornerRadius="6dp"
+                app:icon="@drawable/ic_edit_24"
+                app:iconPadding="16dp"
+                app:iconSize="17dp"
+                app:iconTint="?attr/colorAccent"
+                app:layout_constraintBottom_toBottomOf="@+id/ivThumbnail"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/tvPickAThumbnailMessage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="32dp"
+                android:layout_marginBottom="32dp"
+                android:gravity="center"
+                android:text="@string/please_pick_a_thumbnail_for_your_live_stream"
+                android:textSize="17sp"
+                app:layout_constraintBottom_toTopOf="@+id/btnSelectImage"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/textView9"
+                style="@style/TextFieldHintTypical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/title"
+                app:layout_constraintStart_toStartOf="@+id/etTitle"
+                app:layout_constraintTop_toBottomOf="@+id/ivThumbnail" />
+
+            <TextView
+                android:id="@+id/tvScheduleTime"
+                style="@style/TextFieldHintTypical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/schedule_time"
+                app:layout_constraintStart_toStartOf="@+id/etTitle"
+                app:layout_constraintTop_toBottomOf="@+id/tlBio"
+                tools:visibility="gone" />
+
+            <com.example.livestream.commons.ui.widgets.ExtendedEditText
+                android:id="@+id/etTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:ellipsize="end"
+                android:hint="@string/enter_title_for_your_live_stream"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:maxLength="120"
+                android:maxLines="2"
+                android:textColorHint="@color/bluey_grey_60"
+                android:textSize="17sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tlBio"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:boxCornerRadiusBottomEnd="4dp"
+                app:boxCornerRadiusBottomStart="4dp"
+                app:boxCornerRadiusTopEnd="4dp"
+                app:boxCornerRadiusTopStart="4dp"
+                app:layout_constraintEnd_toEndOf="@+id/etTitle"
+                app:layout_constraintStart_toStartOf="@+id/etTitle"
+                app:layout_constraintTop_toBottomOf="@+id/etTitle">
+
+                <com.example.livestream.commons.ui.widgets.ExtendedTextInputEditText
+                    android:id="@+id/etDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:hint="@string/enter_description_for_you_live_stream"
+                    android:inputType="textMultiLine"
+                    android:maxLength="1000"
+                    android:maxLines="10"
+                    android:minLines="2"
+                    android:textColorHint="@color/bluey_grey_60"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.example.livestream.commons.ui.widgets.ExtendedEditText
+                android:id="@+id/etDateTimePicker"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_time_24"
+                android:drawablePadding="16dp"
+                android:drawableTint="?attr/colorAccent"
+                android:focusable="false"
+                android:hint="@string/pick_a_start_time"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:textColorHint="@color/bluey_grey_60"
+                app:layout_constraintEnd_toEndOf="@+id/etTitle"
+                app:layout_constraintStart_toStartOf="@+id/etTitle"
+                app:layout_constraintTop_toBottomOf="@+id/tvScheduleTime"
+                tools:ignore="TextFields"
+                tools:visibility="gone" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/add_custom_tags_recommended"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="@+id/tlBio"
+                app:layout_constraintStart_toStartOf="@+id/tlBio"
+                app:layout_constraintTop_toBottomOf="@+id/etDateTimePicker" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tlCustomTags"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="140dp"
+                app:boxCornerRadiusBottomEnd="4dp"
+                app:boxCornerRadiusBottomStart="4dp"
+                app:boxCornerRadiusTopEnd="4dp"
+                app:boxCornerRadiusTopStart="4dp"
+                android:layout_marginTop="6dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/etTitle"
+                app:layout_constraintStart_toStartOf="@+id/etTitle"
+                app:layout_constraintTop_toBottomOf="@+id/textView5"
+                app:layout_constraintVertical_bias="0.0">
+
+                <com.example.livestream.commons.ui.widgets.ExtendedTextInputEditText
+                    android:id="@+id/etCustomTags"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:hint="@string/enter_tags_separated_by_space"
+                    android:inputType="text"
+                    android:maxLength="500"
+                    android:maxLines="3"
+                    android:minLines="1"
+                    android:textColorHint="@color/bluey_grey_60"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="16dp"
+        android:orientation="vertical">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnScheduleLiveStream"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:backgroundTint="?attr/colorAccent"
+            android:padding="12dp"
+            android:textAllCaps="false"
+            android:textSize="17sp"
+            app:cornerRadius="8dp"
+            app:iconGravity="textStart"
+            app:iconPadding="16dp"
+            tools:icon="@drawable/ic_go_live_24"
+            tools:text="@string/start_live_stream" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDeleteScheduledStreaming"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="8dp"
+            android:padding="12dp"
+            android:textAllCaps="false"
+            android:textColor="@color/red_700_60"
+            android:textSize="17sp"
+            android:visibility="gone"
+            app:cornerRadius="8dp"
+            app:icon="@drawable/ic_baseline_delete_outline_24"
+            app:iconGravity="textStart"
+            app:iconPadding="16dp"
+            app:iconTint="@color/red_700_60"
+            tools:text="Delete live stream" />
+    </LinearLayout>
+</FrameLayout>

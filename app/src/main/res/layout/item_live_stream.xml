@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    app:cardBackgroundColor="@color/secondary_white_3"
+    app:cardCornerRadius="6dp"
+    app:cardElevation="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="8dp">
+
+        <ImageView
+            android:id="@+id/ivThumbnail"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="@string/video_thumbnail"
+            android:scaleType="centerCrop"
+            app:layout_constraintDimensionRatio="18:9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="-12dp"
+            android:background="@drawable/bg_gradient_thumbnail_footer"
+            app:layout_constraintBottom_toBottomOf="@+id/ivThumbnail"
+            app:layout_constraintTop_toTopOf="@+id/llLiveIndicator" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="-12dp"
+            android:background="@drawable/bg_gradient_thumbnail_footer"
+            app:layout_constraintBottom_toBottomOf="@+id/ivThumbnail"
+            app:layout_constraintTop_toTopOf="@+id/llLiveIndicator" />
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="-36dp"
+            android:background="@drawable/bg_gradient_thumbnail_footer"
+            android:rotation="180"
+            app:layout_constraintBottom_toBottomOf="@+id/tvScheduleDateTime"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvScheduleDateTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:drawablePadding="8dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            app:drawableStartCompat="@drawable/ic_go_live_24"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Live on 20 Nov 2022, 08:60 pm"
+            tools:visibility="visible" />
+
+        <LinearLayout
+            android:id="@+id/llLiveIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/bg_corners_40"
+            android:backgroundTint="?attr/colorAccent"
+            android:gravity="center"
+            android:paddingHorizontal="12dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/ivThumbnail"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:visibility="visible">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/live"
+                android:src="@drawable/ic_go_live_24"
+                app:tint="@color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:text="@string/live"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="@+id/llLiveIndicator"
+            app:layout_constraintStart_toStartOf="@+id/ivStreamerProfilePic"
+            tools:ignore="UseCompoundDrawables">
+
+            <TextView
+                android:id="@+id/tvLikesCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:textColor="@color/white"
+                tools:text="0 likes" />
+
+            <ImageView
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:contentDescription="@string/likes"
+                android:src="@drawable/ic_baseline_thumb_up_24" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="    -    "
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+            app:layout_constraintStart_toEndOf="@+id/linearLayout"
+            app:layout_constraintTop_toTopOf="@+id/linearLayout"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="    -    "
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+            app:layout_constraintStart_toEndOf="@+id/tvViewCount"
+            app:layout_constraintTop_toTopOf="@+id/linearLayout"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/tvViewCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+            app:layout_constraintStart_toEndOf="@+id/textView13"
+            app:layout_constraintTop_toTopOf="@+id/linearLayout"
+            tools:text="0 views" />
+
+        <TextView
+            android:id="@+id/tvPopularity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="4dp"
+            android:textColor="@color/white"
+            app:drawableStartCompat="@drawable/ic_baseline_trending_up_19"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+            app:layout_constraintStart_toEndOf="@+id/textView14"
+            app:layout_constraintTop_toTopOf="@+id/linearLayout"
+            tools:text="0%" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/black_90"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivStreamerProfilePic"
+            app:layout_constraintTop_toBottomOf="@+id/ivThumbnail"
+            tools:text="Some title blah blah blah  blah blah blah blah " />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivStreamerProfilePic"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/ic_profile_placeholder"
+            app:civ_border_color="?attr/colorAccent"
+            tools:civ_border_width="1.5dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvStreamerUsername"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvTitle" />
+
+        <TextView
+            android:id="@+id/tvStreamerUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/bluey_grey_80"
+            app:layout_constraintStart_toStartOf="@+id/tvTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+            tools:text="someusername1234" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="   -   "
+            app:layout_constraintStart_toEndOf="@+id/tvStreamerUsername"
+            app:layout_constraintTop_toTopOf="@+id/tvStreamerUsername"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/tvStreamerFollowers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/bluey_grey_80"
+            app:layout_constraintStart_toEndOf="@+id/textView5"
+            app:layout_constraintTop_toTopOf="@+id/tvStreamerUsername"
+            tools:text="200 followers" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

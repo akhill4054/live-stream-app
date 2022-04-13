@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clipToPadding="false"
+    android:paddingVertical="12dp"
+    android:paddingStart="16dp"
+    android:paddingEnd="36dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingVertical="12dp">
+
+            <LinearLayout
+                android:id="@+id/llEditProfile"
+                style="@style/PopupMenuItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    style="@style/PopupMenuIcon"
+                    android:contentDescription="@string/edit_profile"
+                    android:padding="1dp"
+                    android:src="@drawable/ic_edit_profile_24" />
+
+                <TextView
+                    style="@style/PopupMenuText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/edit_profile" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llViewScheduledStreams"
+                style="@style/PopupMenuItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    style="@style/PopupMenuIcon"
+                    android:contentDescription="@string/edit_profile"
+                    android:src="@drawable/ic_schedule_24" />
+
+                <TextView
+                    style="@style/PopupMenuText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/view_scheduled_live_streams" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llSignOut"
+                style="@style/PopupMenuItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    style="@style/PopupMenuIcon"
+                    android:contentDescription="@string/log_out"
+                    android:src="@drawable/ic_log_out_24" />
+
+                <TextView
+                    style="@style/PopupMenuText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/log_out" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</FrameLayout>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="32dp"
+            android:text="@string/sign_in"
+            android:textColor="@color/black"
+            android:textFontWeight="700"
+            android:textSize="40sp"
+            app:layout_constraintBottom_toTopOf="@+id/lvLogin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="32dp"
+            android:text="@string/choose_a_sign_in_method"
+            android:textColor="@color/black_80"
+            android:textFontWeight="500"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/lvLogin"
+            app:layout_constraintEnd_toEndOf="@+id/textView2"
+            app:layout_constraintStart_toStartOf="@+id/textView2"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <View
+            android:layout_width="120dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="4dp"
+            android:alpha="0.8"
+            android:background="@color/colorPrimary"
+            app:layout_constraintStart_toStartOf="@+id/textView3"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lvLogin"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.38"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="lottie_login_success.json"
+            app:lottie_loop="false" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:gravity="center"
+            android:text="@string/sign_in_benefits"
+            android:textColor="@color/black_80"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lvLogin" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSignInWithEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:paddingHorizontal="18dp"
+            android:paddingVertical="10dp"
+            android:text="@string/sign_in_with_email"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/red_700"
+            app:cornerRadius="6dp"
+            app:icon="@drawable/ic_email_24_white"
+            app:iconPadding="21dp"
+            app:iconTint="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/btnSignInWithPhone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSignInWithPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/blue_500"
+            android:paddingHorizontal="18dp"
+            android:paddingVertical="10dp"
+            android:text="@string/sign_in_with_phone"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:cornerRadius="6dp"
+            app:icon="@drawable/ic_phone_24_white"
+            app:iconPadding="16dp"
+            app:iconTint="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/tvOr"
+            app:layout_constraintEnd_toEndOf="@+id/btnSignInWithEmail"
+            app:layout_constraintStart_toStartOf="@+id/btnSignInWithEmail"
+            app:layout_constraintTop_toBottomOf="@+id/btnSignInWithEmail" />
+
+        <TextView
+            android:id="@+id/tvOr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/or"
+            app:layout_constraintBottom_toTopOf="@+id/btnSignInWithGoogle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnSignInWithPhone" />
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/btnSignInWithGoogle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="32dp"
+            android:text="@string/sign_in_with_google"
+            android:textAllCaps="false"
+            android:textColor="@color/dark_grey"
+            app:backgroundTint="@color/white"
+            app:buttonSize="wide"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/btnSignInWithPhone"
+            app:layout_constraintStart_toStartOf="@+id/btnSignInWithPhone"
+            app:layout_constraintTop_toBottomOf="@+id/tvOr" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
