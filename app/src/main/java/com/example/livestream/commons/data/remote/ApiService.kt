@@ -21,6 +21,15 @@ interface ApiService {
         @Query("count") count: Int? = null
     ): Response<List<LiveStream>>
 
+    @GET("/home/api/v1/search-live-streams/")
+    suspend fun searchLiveStreams(
+        @Query("query") query: String,
+        @Query("after") after: String? = null,
+        @Query("count") count: Int? = null,
+        @Query("is_live") isLive: Boolean? = null,
+        @Query("is_popular") isPopular: Boolean? = null,
+    ): Response<List<LiveStream>>
+
 
     // Auth & login
     @POST("/auth/api/v1/authenticate-user/")

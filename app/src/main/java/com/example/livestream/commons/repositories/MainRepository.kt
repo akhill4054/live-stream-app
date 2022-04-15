@@ -12,6 +12,20 @@ class MainRepository(private val apiService: ApiService) {
         return doNetworkCall { apiService.getRecommendedLiveStreams() }
     }
 
+    suspend fun searchLiveStreams(
+        query: String,
+        isLive: Boolean?,
+        isPopular: Boolean?,
+    ): Flow<Result<List<LiveStream>>> {
+        return doNetworkCall {
+            apiService.searchLiveStreams(
+                query = query,
+                isLive = isLive,
+                isPopular = isPopular,
+            )
+        }
+    }
+
     companion object {
         @Volatile
         private var INSTANCE: MainRepository? = null

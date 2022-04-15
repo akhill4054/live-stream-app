@@ -19,8 +19,8 @@ class ChatMessagesAdapter : RecyclerView.Adapter<ChatMessagesAdapter.ChatMessage
     override fun getItemCount(): Int = messages.size
 
     fun addItem(message: ChatMessage) {
-        messages.add(message)
-        notifyItemInserted(messages.size - 1)
+        messages.add(0, message)
+        notifyItemInserted(0)
     }
 
     @SuppressLint("NotifyDataSetChanged")

@@ -20,6 +20,16 @@ import com.example.livestream.utils.toReadableDateTime
 class LiveStreamsAdapter(private val interactions: Interactions) :
     ListAdapter<LiveStream, LiveStreamsAdapter.LiveStreamVH>(DiffCallback()) {
 
+    private var isSearchMode = false
+
+    fun submitLiveStreams(list: List<LiveStream>, isSearch: Boolean = false) {
+        if (isSearch != this.isSearchMode) {
+            this.isSearchMode = isSearch
+            submitList(null) // Clear list.
+        }
+        submitList(list)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LiveStreamVH {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ItemLiveStreamBinding.inflate(

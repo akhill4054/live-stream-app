@@ -64,4 +64,8 @@
     <string name="show_chat_window">Show chat window</string>
     <string name="enter_your_message">Enter your message…</string>
     <string name="no_messages_yet">No messages yet…</string>
+    <string name="search_filters">Search Filters:</string>
+    <string name="is_live">Is Live</string>
+    <string name="is_popular">Is Popular</string>
+    <string name="close">Close</string>
 </resources>

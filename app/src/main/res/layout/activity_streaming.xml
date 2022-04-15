@@ -97,6 +97,15 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvTitle"
                 tools:text="Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah." />
 
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/cgCustomTags"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:layout_constraintEnd_toEndOf="@+id/tvStreamingDesc"
+                app:layout_constraintStart_toStartOf="@+id/tvStreamingDesc"
+                app:layout_constraintTop_toBottomOf="@+id/tvStreamingDesc" />
+
             <TextView
                 android:id="@+id/tvScheduleDateTime"
                 android:layout_width="wrap_content"
@@ -248,7 +257,7 @@
                     android:layout_width="42dp"
                     android:layout_height="42dp"
                     android:layout_margin="4dp"
-                    android:background="@drawable/bg_streaming_chat_close"
+                    android:background="@drawable/bg_streaming_chat_close_btn"
                     android:contentDescription="@string/hide_chat"
                     android:src="@drawable/ic_baseline_close_24"
                     app:layout_constraintEnd_toEndOf="parent"

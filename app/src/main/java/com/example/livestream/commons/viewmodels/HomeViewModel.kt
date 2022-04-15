@@ -8,6 +8,7 @@ import com.example.livestream.commons.repositories.LiveStreamRepository
 import com.example.livestream.commons.repositories.MainRepository
 import com.example.livestream.commons.repositories.UserRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -23,6 +24,11 @@ class HomeViewModel(
     private val _recommendedLiveStreams = MutableLiveData<Result<List<LiveStream>>>()
     val recommendedLiveStreams: LiveData<Result<List<LiveStream>>> = _recommendedLiveStreams
 
+    private val _searchedLiveStreams = MutableLiveData<Result<List<LiveStream>>>()
+    val searchedLiveStream: LiveData<Result<List<LiveStream>>> = _searchedLiveStreams
+
+    private var searchLiveStreamsJob: Job? = null
+
     init {
         getRecommendedLiveStreams()
     }
@@ -31,6 +37,18 @@ class HomeViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             mainRepository.getRecommendedLiveStreams().collect { result ->
                 _recommendedLiveStreams.postValue(result)
+            }
+        }
+    }
+
+    fun searchLiveStream(query: String?, isLive: Boolean? = null, isPopular: Boolean? = null) {
+        searchLiveStreamsJob?.cancel()
+
+        if (!query.isNullOrBlank()) {
+            searchLiveStreamsJob = viewModelScope.launch(Dispatchers.IO) {
+                mainRepository.searchLiveStreams(query, isLive, isPopular).collect { result ->
+                    _searchedLiveStreams.postValue(result)
+                }
             }
         }
     }

@@ -36,6 +36,7 @@ import com.example.livestream.login.ui.LoginActivity.Companion.launchLogin
 import com.example.livestream.streaming.ui.adapters.ChatMessagesAdapter
 import com.example.livestream.utils.*
 import com.example.livestream.utils.AnimationUtils.Companion.spin
+import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import io.agora.rtc.Constants
@@ -253,6 +254,14 @@ class StreamingActivity : AppCompatActivity() {
 
                 tvTitle.text = it.title
                 tvStreamingDesc.text = it.description
+
+                if (it.customTags?.isNotEmpty() == true) {
+                    for (tag in it.customTags) {
+                        val chip = Chip(cgCustomTags.context)
+                        chip.text = tag
+                        cgCustomTags.addView(chip)
+                    }
+                }
 
                 tvLikesCount.text = "${it.likes}"
                 tvViewsCount.text = "${it.views} views"
@@ -512,8 +521,7 @@ class StreamingActivity : AppCompatActivity() {
                 override fun onMessageReceived(p0: RtmMessage, p1: RtmChannelMember) {
                     Timber.d("Received message: ${p0.text}")
                     val message = gson.fromJson(p0.text, ChatMessage::class.java)
-                    binding.tvNoMessages.isVisible = false
-                    chatMessagesAdapter.addItem(message)
+                    addNewChatMessage(message)
                 }
 
                 override fun onImageMessageReceived(p0: RtmImageMessage?, p1: RtmChannelMember?) {
@@ -611,6 +619,14 @@ class StreamingActivity : AppCompatActivity() {
         }
     }
 
+    private fun addNewChatMessage(message: ChatMessage) {
+        with(binding) {
+            tvNoMessages.isVisible = false
+            chatMessagesAdapter.addItem(message)
+            rvChatMessages.scrollToPosition(0)
+        }
+    }
+
     private fun sendChatMessage(user: User) {
         with(binding) {
             val rtmMessage = rtmClient.createMessage()
@@ -635,9 +651,8 @@ class StreamingActivity : AppCompatActivity() {
                         etChatMessage.text = null
                         showSendMessageProgress(false)
                         showEnterChatWindow(false)
-                        binding.tvNoMessages.isVisible = false
                         binding.etChatMessage.hideKeyboard()
-                        chatMessagesAdapter.addItem(chatMessage)
+                        addNewChatMessage(chatMessage)
                     }
                 }
 
