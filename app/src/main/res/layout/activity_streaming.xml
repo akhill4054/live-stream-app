@@ -106,6 +106,22 @@
                 app:layout_constraintStart_toStartOf="@+id/tvStreamingDesc"
                 app:layout_constraintTop_toBottomOf="@+id/tvStreamingDesc" />
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEndStreaming"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:paddingVertical="12dp"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:text="@string/end_live_stream"
+                app:cornerRadius="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/tvStreamingDesc"
+                app:layout_constraintStart_toStartOf="@+id/tvStreamingDesc"
+                app:layout_constraintTop_toBottomOf="@+id/cgCustomTags"
+                app:rippleColor="@color/red_700" />
+
             <TextView
                 android:id="@+id/tvScheduleDateTime"
                 android:layout_width="wrap_content"

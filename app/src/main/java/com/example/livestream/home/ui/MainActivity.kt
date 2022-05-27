@@ -76,6 +76,13 @@ class MainActivity : AppCompatActivity(), LiveStreamsAdapter.Interactions,
         subscribeObservers()
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        binding.progressBar.isVisible = true
+        homeViewModel.getRecommendedLiveStreams()
+    }
+
     private fun setupUI() {
         with(binding) {
             recommendedStreamsAdapter = LiveStreamsAdapter(this@MainActivity)
@@ -91,7 +98,10 @@ class MainActivity : AppCompatActivity(), LiveStreamsAdapter.Interactions,
                         searchFilterIsPopular,
                     )
                 } else {
-                    homeViewModel.getRecommendedLiveStreams()
+                    homeViewModel.getRecommendedLiveStreams(
+                        isLive = searchFilterIsLive,
+                        isPopular = searchFilterIsPopular,
+                    )
                 }
             }
 
@@ -130,14 +140,11 @@ class MainActivity : AppCompatActivity(), LiveStreamsAdapter.Interactions,
             setupProfileMenu(user)
         }
 
-        var isCurrentResultFromSearch = false
-
         observeResult(
             homeViewModel.recommendedLiveStreams,
             onSuccess = { data ->
-                isCurrentResultFromSearch = false
                 binding.gpEmptySearchResult.isVisible = data.isEmpty()
-                recommendedStreamsAdapter.submitLiveStreams(data)
+                recommendedStreamsAdapter.submitList(data)
             },
             onFailure = { e ->
                 binding.root.buildSnackbarForError(
@@ -155,9 +162,9 @@ class MainActivity : AppCompatActivity(), LiveStreamsAdapter.Interactions,
                     binding.srfLiveStreams.isRefreshing = false
                     binding.progressBar.isVisible = false
                 }
-                if (recommendedStreamsAdapter.itemCount == 0 || isCurrentResultFromSearch) {
+                if (!binding.srfLiveStreams.isRefreshing) {
                     binding.progressBar.isVisible = isLoading
-                    if (isLoading && isCurrentResultFromSearch) {
+                    if (isLoading) {
                         recommendedStreamsAdapter.submitList(null)
                     }
                 }
@@ -166,9 +173,8 @@ class MainActivity : AppCompatActivity(), LiveStreamsAdapter.Interactions,
         observeResult(
             homeViewModel.searchedLiveStream,
             onSuccess = { data ->
-                isCurrentResultFromSearch = true
                 binding.gpEmptySearchResult.isVisible = data.isEmpty()
-                recommendedStreamsAdapter.submitLiveStreams(data)
+                recommendedStreamsAdapter.submitList(data)
             },
             onFailure = { e ->
                 binding.root.buildSnackbarForError(
@@ -257,20 +263,34 @@ class MainActivity : AppCompatActivity(), LiveStreamsAdapter.Interactions,
     override fun onIsLiveFilterChecked(isChecked: Boolean) {
         this.searchFilterIsLive = if (isChecked) true else null
 
-        homeViewModel.searchLiveStream(
-            binding.searchView.query?.toString(),
-            searchFilterIsLive,
-            searchFilterIsPopular,
-        )
+        if (binding.searchView.query?.toString().isNullOrBlank()) {
+            homeViewModel.getRecommendedLiveStreams(
+                isLive = searchFilterIsLive,
+                isPopular = searchFilterIsPopular,
+            )
+        } else {
+            homeViewModel.searchLiveStream(
+                binding.searchView.query?.toString(),
+                searchFilterIsLive,
+                searchFilterIsPopular,
+            )
+        }
     }
 
     override fun onIsPopularFilterChecked(isChecked: Boolean) {
         this.searchFilterIsPopular = if (isChecked) true else null
 
-        homeViewModel.searchLiveStream(
-            binding.searchView.query?.toString(),
-            searchFilterIsLive,
-            searchFilterIsPopular,
-        )
+        if (binding.searchView.query?.toString().isNullOrBlank()) {
+            homeViewModel.getRecommendedLiveStreams(
+                isLive = searchFilterIsLive,
+                isPopular = searchFilterIsPopular,
+            )
+        } else {
+            homeViewModel.searchLiveStream(
+                binding.searchView.query?.toString(),
+                searchFilterIsLive,
+                searchFilterIsPopular,
+            )
+        }
     }
 }

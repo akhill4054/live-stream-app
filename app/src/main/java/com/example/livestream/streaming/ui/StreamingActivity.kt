@@ -24,6 +24,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import androidx.lifecycle.lifecycleScope
 import com.example.livestream.R
+import com.example.livestream.commons.data.models.commons.Result
 import com.example.livestream.commons.data.models.commons.User
 import com.example.livestream.commons.data.models.streamings.WatchLiveStream
 import com.example.livestream.commons.data.models.streamings.chat.ChatMessage
@@ -37,6 +38,7 @@ import com.example.livestream.streaming.ui.adapters.ChatMessagesAdapter
 import com.example.livestream.utils.*
 import com.example.livestream.utils.AnimationUtils.Companion.spin
 import com.google.android.material.chip.Chip
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import io.agora.rtc.Constants
@@ -45,7 +47,10 @@ import io.agora.rtc.RtcEngine
 import io.agora.rtc.models.ClientRoleOptions
 import io.agora.rtc.video.VideoCanvas
 import io.agora.rtm.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 class StreamingActivity : AppCompatActivity() {
@@ -282,6 +287,11 @@ class StreamingActivity : AppCompatActivity() {
                 if (data.isStreamer) {
                     llDetails.alpha = 0.7F
                     btnCamera.updateMarginInConstraintLayout(bottom = 12)
+
+                    btnEndStreaming.isVisible = true
+                    btnEndStreaming.setOnClickListener {
+                        endLiveStream()
+                    }
                 } else {
                     llDetails.updateMarginInConstraintLayout(bottom = 12)
                 }
@@ -520,6 +530,15 @@ class StreamingActivity : AppCompatActivity() {
 
                 override fun onMessageReceived(p0: RtmMessage, p1: RtmChannelMember) {
                     Timber.d("Received message: ${p0.text}")
+
+                    if (p0.text == "%%%STREAMING_ENDED%%%") {
+                        showLongToast("Streaming ended by the host.")
+                        setResult(2006, Intent().apply {
+                            putExtra("streaming_id", streamingId)
+                        })
+                        finish()
+                        return
+                    }
                     val message = gson.fromJson(p0.text, ChatMessage::class.java)
                     addNewChatMessage(message)
                 }
@@ -645,7 +664,7 @@ class StreamingActivity : AppCompatActivity() {
 
             showSendMessageProgress()
 
-            rtmChannel!!.sendMessage(rtmMessage, object : ResultCallback<Void> {
+            rtmChannel?.sendMessage(rtmMessage, object : ResultCallback<Void> {
                 override fun onSuccess(p0: Void?) {
                     runOnUiThread {
                         etChatMessage.text = null
@@ -664,8 +683,71 @@ class StreamingActivity : AppCompatActivity() {
                         showSendMessageProgress(false)
                     }
                 }
-            })
+            }) ?: {
+                showShortToast("Not connected to RTM server.")
+                showSendMessageProgress(false)
+            }
         }
+    }
+
+    private fun endLiveStream() {
+        MaterialAlertDialogBuilder(this)
+            .setTitle("Confirm Action")
+            .setMessage("Are you sure you want to end the streaming?")
+            .setPositiveButton("End") { dialog, _ ->
+                // End streaming.
+                lifecycleScope.launch(Dispatchers.IO) {
+                    doNetworkCall {
+                        AppApiClient.getInstance(applicationContext).apiService.endLiveStream(streamingId)
+                    }.collect {
+                        withContext(Dispatchers.Main) {
+                            when(it) {
+                                is Result.Success -> {
+                                    showShortToast("Live stream deleted.")
+
+                                    val rtmMessage = rtmClient.createMessage()
+                                    rtmMessage.text = "%%%STREAMING_ENDED%%%"
+
+                                    rtmChannel?.sendMessage(rtmMessage, object : ResultCallback<Void> {
+                                        override fun onSuccess(p0: Void?) {
+                                            runOnUiThread {
+                                                showShortToast("Live stream ended.")
+                                                setResult(2006, Intent().apply {
+                                                    putExtra("streaming_id", streamingId)
+                                                })
+                                            }
+                                            finish()
+                                        }
+
+                                        override fun onFailure(p0: ErrorInfo?) {
+                                            runOnUiThread {
+                                                showShortToast("Something went wrong, couldn't end the streaming.")
+                                                binding.streamingProgress.isVisible = false
+                                            }
+                                        }
+                                    }) ?: kotlin.run {
+                                        showShortToast("Something went wrong, couldn't end the streaming. Code: 1161")
+                                        finish()
+                                    }
+                                }
+                                is Result.Loading -> {
+                                    binding.streamingProgress.isVisible = true
+                                }
+                                is Result.Failure -> {
+                                    binding.streamingProgress.isVisible = false
+                                    binding.root.buildSnackbarForError(message = it.e.message)
+                                        .show()
+                                }
+                            }
+                        }
+                    }
+                }
+                dialog.dismiss()
+            }
+            .setNegativeButton("Cancel") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
     }
 
     private fun showSendMessageProgress(isLoading: Boolean = true) {

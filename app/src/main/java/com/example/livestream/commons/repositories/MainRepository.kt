@@ -8,8 +8,17 @@ import kotlinx.coroutines.flow.Flow
 
 class MainRepository(private val apiService: ApiService) {
 
-    suspend fun getRecommendedLiveStreams(): Flow<Result<List<LiveStream>>> {
-        return doNetworkCall { apiService.getRecommendedLiveStreams() }
+    suspend fun getRecommendedLiveStreams(
+        isLive: Boolean? = null,
+        isPopular: Boolean? = null
+    ): Flow<Result<List<LiveStream>>> {
+        return doNetworkCall {
+            apiService.getRecommendedLiveStreams(
+                isLive = isLive,
+                isPopular = isPopular,
+                count = 10,
+            )
+        }
     }
 
     suspend fun searchLiveStreams(

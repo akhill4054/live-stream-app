@@ -18,7 +18,9 @@ interface ApiService {
     @GET("/home/api/v1/get-recommended-live-streams/")
     suspend fun getRecommendedLiveStreams(
         @Query("after") after: String? = null,
-        @Query("count") count: Int? = null
+        @Query("count") count: Int? = null,
+        @Query("is_live") isLive: Boolean? = null,
+        @Query("is_popular") isPopular: Boolean? = null,
     ): Response<List<LiveStream>>
 
     @GET("/home/api/v1/search-live-streams/")
@@ -79,4 +81,7 @@ interface ApiService {
 
     @POST("/streamings/api/v1/dislike-live-stream/")
     suspend fun dislikeLiveStream(@Query("streaming_id") streamingId: String): Response<LikeLiveStream.Response>
+
+    @POST("/streamings/api/v1/end-live-stream/")
+    suspend fun endLiveStream(@Query("streaming_id") streamingId: String): Response<LikeLiveStream.Response>
 }

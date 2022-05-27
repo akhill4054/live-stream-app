@@ -40,14 +40,34 @@ android {
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    // RTC
+    implementation 'com.google.android.exoplayer:exoplayer:2.17.1'
+    // RTM
+    implementation ('io.socket:socket.io-client:2.0.0') {
+        exclude group: 'org.json', module: 'json'
+    }
 
     // UI.
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    // Blur.
+    implementation 'jp.wasabeef:blurry:4.0.1'
+
+    // Link preview.
+//    implementation 'io.github.ponnamkarthik:richlinkpreview:1.0.9'
+//    implementation 'org.jsoup:jsoup:1.12.1'
+
+    implementation 'org.jsoup:jsoup:1.12.1'
+    implementation 'io.github.ponnamkarthik:richlinkpreview:1.0.9'
+
+    implementation 'com.nicknackdevelopment:linkpreview:4.0'
+
     // Image.
     implementation 'com.github.dhaval2404:imagepicker:2.1'
     implementation 'com.github.bumptech.glide:glide:4.13.0'

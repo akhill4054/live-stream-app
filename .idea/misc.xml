@@ -11,6 +11,8 @@
         <entry key="..\:/Users/Akhil/Desktop/Projects/Personal/livestream/live-stream-android/app/src/main/res/drawable/bg_search.xml" value="0.1505" />
         <entry key="..\:/Users/Akhil/Desktop/Projects/Personal/livestream/live-stream-android/app/src/main/res/drawable/bg_search_list_gradient_header.xml" value="0.155" />
         <entry key="..\:/Users/Akhil/Desktop/Projects/Personal/livestream/live-stream-android/app/src/main/res/drawable/bg_splash_gradient.xml" value="0.155" />
+        <entry key="..\:/Users/Akhil/Desktop/Projects/Personal/livestream/live-stream-android/app/src/main/res/drawable/bg_streaming_chat_close.xml" value="0.155" />
+        <entry key="..\:/Users/Akhil/Desktop/Projects/Personal/livestream/live-stream-android/app/src/main/res/drawable/bg_streaming_chat_close_btn.xml" value="0.1" />
         <entry key="..\:/Users/Akhil/Desktop/Projects/Personal/livestream/live-stream-android/app/src/main/res/drawable/bg_streaming_control.xml" value="0.155" />
         <entry key="..\:/Users/Akhil/Desktop/Projects/Personal/livestream/live-stream-android/app/src/main/res/drawable/ic_app_logo_196.xml" value="0.19" />
         <entry key="..\:/Users/Akhil/Desktop/Projects/Personal/livestream/live-stream-android/app/src/main/res/drawable/ic_app_logo_24.xml" value="0.19" />
@@ -29,9 +31,12 @@
         <entry key="..\:/Users/Akhil/Desktop/Projects/Personal/livestream/live-stream-android/app/src/main/res/drawable/splash_background.xml" value="0.155" />
         <entry key="..\:/Users/Akhil/Desktop/Projects/Personal/livestream/live-stream-android/app/src/main/res/layout/activity_edit_profile.xml" value="0.25" />
         <entry key="..\:/Users/Akhil/Desktop/Projects/Personal/livestream/live-stream-android/app/src/main/res/layout/activity_login.xml" value="0.18" />
-        <entry key="..\:/Users/Akhil/Desktop/Projects/Personal/livestream/live-stream-android/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/Akhil/Desktop/Projects/Personal/livestream/live-stream-android/app/src/main/res/layout/activity_main.xml" value="0.21" />
         <entry key="..\:/Users/Akhil/Desktop/Projects/Personal/livestream/live-stream-android/app/src/main/res/layout/activity_schedule_live_stream.xml" value="0.22" />
+        <entry key="..\:/Users/Akhil/Desktop/Projects/Personal/livestream/live-stream-android/app/src/main/res/layout/activity_search_live_streams.xml" value="0.2" />
         <entry key="..\:/Users/Akhil/Desktop/Projects/Personal/livestream/live-stream-android/app/src/main/res/layout/activity_streaming.xml" value="0.22" />
+        <entry key="..\:/Users/Akhil/Desktop/Projects/Personal/livestream/live-stream-android/app/src/main/res/layout/activity_test.xml" value="0.22" />
+        <entry key="..\:/Users/Akhil/Desktop/Projects/Personal/livestream/live-stream-android/app/src/main/res/layout/bottom_sheet_live_stream_search_filters.xml" value="0.22" />
         <entry key="..\:/Users/Akhil/Desktop/Projects/Personal/livestream/live-stream-android/app/src/main/res/layout/dialog_profile_popup.xml" value="0.25" />
         <entry key="..\:/Users/Akhil/Desktop/Projects/Personal/livestream/live-stream-android/app/src/main/res/layout/item_live_stream.xml" value="0.33" />
         <entry key="..\:/Users/Akhil/Desktop/Projects/Personal/livestream/live-stream-android/app/src/main/res/layout/item_live_stream_chat_message.xml" value="0.25" />

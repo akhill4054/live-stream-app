@@ -27,15 +27,17 @@ class HomeViewModel(
     private val _searchedLiveStreams = MutableLiveData<Result<List<LiveStream>>>()
     val searchedLiveStream: LiveData<Result<List<LiveStream>>> = _searchedLiveStreams
 
+    private var getRecommendedLiveStreamsJob: Job? = null
     private var searchLiveStreamsJob: Job? = null
 
-    init {
-        getRecommendedLiveStreams()
-    }
-
-    fun getRecommendedLiveStreams() {
-        viewModelScope.launch(Dispatchers.IO) {
-            mainRepository.getRecommendedLiveStreams().collect { result ->
+    fun getRecommendedLiveStreams(isLive: Boolean? = null, isPopular: Boolean? = null) {
+        getRecommendedLiveStreamsJob?.cancel()
+        
+        getRecommendedLiveStreamsJob = viewModelScope.launch(Dispatchers.IO) {
+            mainRepository.getRecommendedLiveStreams(
+                isLive = isLive,
+                isPopular = isPopular,
+            ).collect { result ->
                 _recommendedLiveStreams.postValue(result)
             }
         }
