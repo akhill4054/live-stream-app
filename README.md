@@ -3,12 +3,12 @@ Public live video streaming Android app, that uses [Agora.io](https://www.agora.
 
 User, live-stream, auth, and session management are being done in a Python | Flask based backend server [(project link)](https://github.com/akhill4054/live-stream-backend), that uses [Firebase - Cloud Firestore](https://firebase.google.com/docs/firestore) database, and authentication cloud services.
 
-✅ Real-time video streaming with Agora.io.
-✅ Interactive live chat functionality.
-✅ Secure authentication & user management with Firebase.
-✅ Scalable backend using Python & Flask.
-✅ Efficient session handling for seamless live-streaming.
-✅ User profile management.
+✅ Real-time video streaming with Agora.io. <br>
+✅ Interactive live chat functionality. <br>
+✅ Secure authentication & user management with Firebase. <br>
+✅ Scalable backend using Python & Flask. <br>
+✅ Efficient session handling for seamless live-streaming. <br>
+✅ User profile management. <br>
 
 ## App demo video
 
